@@ -20,7 +20,7 @@ typedef Text LabelTextBuilder(double offsetY);
 /// for quick navigation of the BoxScrollView.
 class DraggableScrollbar extends StatefulWidget {
   /// The view that will be scrolled with the scroll thumb
-  final BoxScrollView child;
+  final ScrollView child;
 
   /// A function that builds a thumb using the current configuration
   final ScrollThumbBuilder scrollThumbBuilder;
@@ -65,9 +65,7 @@ class DraggableScrollbar extends StatefulWidget {
     this.scrollbarTimeToFade = const Duration(milliseconds: 600),
     this.labelTextBuilder,
     this.labelConstraints,
-  })  : assert(controller != null),
-        assert(scrollThumbBuilder != null),
-        assert(child.scrollDirection == Axis.vertical),
+  })  : assert(child.scrollDirection == Axis.vertical),
         super(key: key);
 
   DraggableScrollbar.rrect({
@@ -617,7 +615,8 @@ class SlideFadeTransition extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animation,
-      builder: (context, child) => animation.value == 0.0 ? Container() : child!,
+      builder: (context, child) =>
+          animation.value == 0.0 ? Container() : child!,
       child: SlideTransition(
         position: Tween(
           begin: Offset(0.3, 0.0),
